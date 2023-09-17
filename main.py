@@ -190,6 +190,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.add_functions()
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Калькулятор"))
@@ -215,9 +217,55 @@ class Ui_MainWindow(object):
         self.btn_pow.setText(_translate("MainWindow", "^"))
         self.btn_root.setText(_translate("MainWindow", "√"))
         self.btn_multiply.setText(_translate("MainWindow", "*"))
-        self.btn_del.setText(_translate("MainWindow", "←"))
+        self.btn_del.setText(_translate("MainWindow", "Х"))
+
+    def add_functions(self):
+        self.btn_0.clicked.connect(lambda: self.write_number(self.btn_0.text()))
+        self.btn_1.clicked.connect(lambda: self.write_number(self.btn_1.text()))
+        self.btn_2.clicked.connect(lambda: self.write_number(self.btn_2.text()))
+        self.btn_3.clicked.connect(lambda: self.write_number(self.btn_3.text()))
+        self.btn_4.clicked.connect(lambda: self.write_number(self.btn_4.text()))
+        self.btn_5.clicked.connect(lambda: self.write_number(self.btn_5.text()))
+        self.btn_6.clicked.connect(lambda: self.write_number(self.btn_6.text()))
+        self.btn_7.clicked.connect(lambda: self.write_number(self.btn_7.text()))
+        self.btn_8.clicked.connect(lambda: self.write_number(self.btn_8.text()))
+        self.btn_9.clicked.connect(lambda: self.write_number(self.btn_9.text()))
+        self.btn_multiply.clicked.connect(lambda: self.write_number(self.btn_multiply.text()))
+        self.btn_add.clicked.connect(lambda: self.write_number(self.btn_add.text()))
+        self.btn_interest.clicked.connect(lambda: self.write_number(self.btn_interest.text()))
+        self.btn_dot.clicked.connect(lambda: self.write_number(self.btn_dot.text()))
+        self.btn_divide.clicked.connect(lambda: self.write_number(self.btn_divide.text()))
+        self.btn_subtract.clicked.connect(lambda: self.write_number(self.btn_subtract.text()))
+        self.btn_pow.clicked.connect(lambda: self.write_number("**"))
+        self.btn_equal.clicked.connect(self.results)
+        self.btn_clear.clicked.connect(self.clear_function)
+        self.btn_del.clicked.connect(self.del_function)
+
+    def clear_function(self):
+        self.label_history.setText("Історія:\n")
+    def del_function(self):
+        self.label_result.setText("0")
+
+    def write_number(self, number):
+        if self.label_result.text() == "0" or self.label_result.text() == "Error":
+            self.label_result.setText(number)
+        else:
+            self.label_result.setText(self.label_result.text()+number)
+
+    def results(self):
+        pattern = r"/0\.\d+"
+        if "/0" in self.label_result.text() and not re.search(pattern, self.label_result.text()):
+            self.label_history.setText(self.label_history.text() + "\n" + self.label_result.text() + "= Error")
+            self.label_result.setText("Error")
+        else:
+            res = eval(self.label_result.text())
+            self.label_history.setText(self.label_history.text() + "\n" + self.label_result.text() + "=" + str(res))
+            self.label_result.setText(str(res))
+
+
 
 if __name__ == "__main__":
+    import re
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
