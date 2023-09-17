@@ -252,7 +252,7 @@ class Ui_MainWindow(object):
 
     def results(self):
         pattern = r"/0\.\d+"
-        if "/0" in self.label_result.text() or "Error" in self.label_result.text() and not re.search(pattern, self.label_result.text()):
+        if ("/0" in self.label_result.text() or "Error" in self.label_result.text()) and not re.search(pattern, self.label_result.text()):
             self.label_history.setText(self.label_history.text() + "\n" + self.label_result.text() + "= Error")
             self.label_result.setText("Error")
         else:
