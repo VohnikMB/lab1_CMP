@@ -234,8 +234,7 @@ def _init_():
             self.btn_clear.clicked.connect(lambda: programFunctionality.clear_function(self.label_history))
 
             self.btn_del.clicked.connect(lambda: programFunctionality.del_function(self.label_result))
-            self.btn_root.clicked.connect(
-                lambda: programFunctionality.root_function(self.label_result, self.label_history))
+            self.btn_root.clicked.connect(lambda: programFunctionality.root_function(self.label_result, self.label_history))
 
         def write_number(self, number):
             if self.label_result.text() == "0" or self.label_result.text() == "Error":
