@@ -232,7 +232,6 @@ def _init_():
             self.btn_pow.clicked.connect(lambda: self.write_number("**"))
             self.btn_equal.clicked.connect(lambda: programFunctionality.results(self.label_result, self.label_history))
             self.btn_clear.clicked.connect(lambda: programFunctionality.clear_function(self.label_history))
-
             self.btn_del.clicked.connect(lambda: programFunctionality.del_function(self.label_result))
             self.btn_root.clicked.connect(lambda: programFunctionality.root_function(self.label_result, self.label_history))
 
