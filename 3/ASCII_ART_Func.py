@@ -34,7 +34,7 @@ def saveFunc(textBrowser):
 
     with open('style.css', 'w') as css_file:
         css_file.write(".text-block {\n")
-        css_file.write(f"  font-family: "{font.family()}";\n")
+        css_file.write(f"  font-family: {font.family()};\n")
         css_file.write(f"  font-size: {font.pointSize()}pt;\n")
         css_file.write(f"  color: {color.name()};\n")
         css_file.write("}\n")
