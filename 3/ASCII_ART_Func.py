@@ -1,8 +1,5 @@
 from pyfiglet import Figlet
-from PyQt5.QtWidgets import QFontDialog
-from PyQt5.QtWidgets import QColorDialog
-
-
+from PyQt5.QtWidgets import QFontDialog, QColorDialog
 
 def update_text_browser(textBrowser, lineEdit, symbolcomboBox):
     f = Figlet(font="banner")
@@ -27,7 +24,7 @@ def saveFunc(textBrowser):
         </head>
         <body>
             <div class="text-block"><pre>
-                {txt_content}
+{txt_content}
                 </pre>
             </div>
         </body>
@@ -37,7 +34,7 @@ def saveFunc(textBrowser):
 
     with open('style.css', 'w') as css_file:
         css_file.write(".text-block {\n")
-        css_file.write(f"  font-family: '{font.family()}';\n")
+        css_file.write(f"  font-family: "{font.family()}";\n")
         css_file.write(f"  font-size: {font.pointSize()}pt;\n")
         css_file.write(f"  color: {color.name()};\n")
         css_file.write("}\n")
