@@ -12,12 +12,16 @@ def saveFunc(textBrowser):
     font = format.font()
     color = format.foreground().color()
 
-    with open("save.html", "w") as html_file:
+    with (open("save.html", "w") as html_file):
         txt_content = textBrowser.toPlainText()
+        css_content = ".text-block {\n"+f"  font-family: {font.family()};\n"+f"  font-size: {font.pointSize()}pt;\n"+f"  color: {color.name()};\n"+"}"
         html_content = f"""
         <!DOCTYPE html>
         <html>
         <head>
+        <style>
+            {css_content}
+        </style>
         <link href="style.css" rel="stylesheet" type="text/css" />
             <meta charset="UTF-8">
             <title>Save</title>
