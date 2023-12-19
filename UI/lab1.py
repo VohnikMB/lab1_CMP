@@ -4,35 +4,34 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtCore
 import math
 import re
-import pytest
+
 class Lab1MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.init_ui()
 
     def init_ui(self):
-        font = QFont()
-        font.setPointSize(21)
-        font.setBold(False)
-        font.setUnderline(False)
-        font.setWeight(50)
-        font.setStrikeOut(False)
 
         self.setWindowTitle("Калькулятор")
         self.setGeometry(0, 0, 959, 738)
         self.centralwidget = QWidget()
         self.setCentralWidget(self.centralwidget)
 
-        self.label_result = QLabel(self.centralwidget)
-        self.label_result.setGeometry(10, 10, 711, 70)
+        self.label_result = QtWidgets.QLabel(self.centralwidget)
+        self.label_result.setGeometry(QtCore.QRect(10, 10, 711, 70))
+        font = QtGui.QFont()
+        font.setPointSize(21)
+        font.setBold(False)
+        font.setUnderline(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
         self.label_result.setFont(font)
         self.label_result.setStyleSheet("background-color: rgb(227, 227, 227);")
         self.label_result.setObjectName("label_result")
-
-        self.label_history = QLabel(self.centralwidget)
+        self.label_history = QtWidgets.QLabel(self.centralwidget)
         self.label_history.setEnabled(True)
-        self.label_history.setGeometry(730, 10, 211, 671)
-
+        self.label_history.setGeometry(QtCore.QRect(730, 10, 211, 671))
+        font = QtGui.QFont()
         font.setPointSize(12)
         font.setKerning(True)
         self.label_history.setFont(font)
@@ -41,8 +40,7 @@ class Lab1MainWindow(QMainWindow):
         self.label_history.setScaledContents(False)
         self.label_history.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
         self.label_history.setObjectName("label_history")
-
-        self.btn_7 = QPushButton(self.centralwidget)
+        self.btn_7 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_7.setGeometry(QtCore.QRect(10, 90, 142, 142))
         font = QtGui.QFont()
         font.setPointSize(35)
@@ -51,65 +49,72 @@ class Lab1MainWindow(QMainWindow):
         self.btn_7.setObjectName("btn_7")
         self.btn_8 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_8.setGeometry(QtCore.QRect(152, 90, 142, 142))
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_8.setFont(font)
         self.btn_8.setObjectName("btn_8")
         self.btn_9 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_9.setGeometry(QtCore.QRect(294, 90, 142, 142))
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_9.setFont(font)
         self.btn_9.setObjectName("btn_9")
         self.btn_add = QtWidgets.QPushButton(self.centralwidget)
         self.btn_add.setGeometry(QtCore.QRect(436, 90, 142, 142))
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_add.setFont(font)
         self.btn_add.setObjectName("btn_add")
         self.btn_6 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_6.setGeometry(QtCore.QRect(294, 240, 142, 142))
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_6.setFont(font)
         self.btn_6.setObjectName("btn_6")
         self.btn_subtract = QtWidgets.QPushButton(self.centralwidget)
         self.btn_subtract.setGeometry(QtCore.QRect(436, 240, 142, 142))
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_subtract.setFont(font)
         self.btn_subtract.setObjectName("btn_subtract")
         self.btn_5 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_5.setGeometry(QtCore.QRect(152, 240, 142, 142))
-
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_5.setFont(font)
         self.btn_5.setObjectName("btn_5")
         self.btn_4 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_4.setGeometry(QtCore.QRect(10, 240, 142, 142))
-
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_4.setFont(font)
         self.btn_4.setObjectName("btn_4")
         self.btn_3 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_3.setGeometry(QtCore.QRect(294, 390, 142, 142))
-
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_3.setFont(font)
         self.btn_3.setObjectName("btn_3")
         self.btn_divide = QtWidgets.QPushButton(self.centralwidget)
         self.btn_divide.setGeometry(QtCore.QRect(436, 390, 142, 142))
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_divide.setFont(font)
         self.btn_divide.setObjectName("btn_divide")
         self.btn_2 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_2.setGeometry(QtCore.QRect(152, 390, 142, 142))
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_2.setFont(font)
         self.btn_2.setObjectName("btn_2")
         self.btn_1 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_1.setGeometry(QtCore.QRect(10, 390, 142, 142))
-
+        font = QtGui.QFont()
+        font.setPointSize(35)
         self.btn_1.setFont(font)
         self.btn_1.setObjectName("btn_1")
         self.btn_0 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_0.setGeometry(QtCore.QRect(10, 540, 142, 142))
-
         font = QtGui.QFont()
         font.setFamily("MS Shell Dlg 2")
         font.setPointSize(35)
@@ -177,12 +182,11 @@ class Lab1MainWindow(QMainWindow):
         self.btn_del.setStyleSheet("color: rgb(255, 255, 255);\n"
                                    "background-color: rgb(255, 0, 0);")
         self.btn_del.setObjectName("btn_del")
+
         self.retranslateUi()
         self.add_functions()
-        self.test_clear_function()
 
     def retranslateUi(self):
-
         self.label_result.setText("0")
         self.label_history.setText("Історія:\n")
         self.btn_7.setText("7")
