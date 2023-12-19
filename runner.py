@@ -1,28 +1,41 @@
-import os
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from UI.menu import Ui_MainWindow
+from UI.lab1 import Lab1MainWindow
+from UI.lab2 import Lab2MainWindow
+from UI.lab3 import Lab3MainWindow
+from UI.lab4 import Lab4MainWindow
+class MenuWindow(QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.login_lab1_function)
+        self.pushButton_2.clicked.connect(self.login_lab2_function)
+        self.pushButton_3.clicked.connect(self.login_lab3_function)
+        self.pushButton_4.clicked.connect(self.login_lab4_function)
+        self.pushButton_6.clicked.connect(self.login_lab6_function)
 
-def run_selected_main():
-    data_folder = 'Data'
+    def login_lab1_function(self):
+        self.window = Lab1MainWindow()
+        self.window.show()
+    def login_lab2_function(self):
+        self.window = Lab2MainWindow()
+        self.window.show()
+    def login_lab3_function(self):
+        self.window = Lab3MainWindow()
+        self.window.show()
 
+    def login_lab4_function(self):
+        self.window = Lab4MainWindow()
+        self.window.show()
 
-    folders_in_data = [d for d in os.listdir(data_folder) if os.path.isdir(os.path.join(data_folder, d))]
-    print("Доступні роботи:")
-    print("\n".join(folders_in_data))
+    def login_lab6_function(self):
+        from BLL.Unit_Test import unittest_box
+        unittest_box()
 
-
-    selected_folder = input("Виберіть лабораторну: ")
-
-
-    if selected_folder in folders_in_data:
-        folder_path = os.path.join(data_folder, selected_folder)
-        main_path = os.path.join(folder_path, 'main.py')
-
-
-        if os.path.exists(main_path):
-            os.system(f'python {main_path}')
-        else:
-            print(f"main.py not found in {folder_path}")
-    else:
-        print("Введено некоректну назву папки.")
-
-
-run_selected_main()
+if __name__ == '__main__':
+    # Ініціалізація додатку та головного вікна
+    app = QApplication(sys.argv)
+    login_window = MenuWindow()
+    login_window.show()
+    app.exec_()

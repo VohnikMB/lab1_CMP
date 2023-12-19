@@ -1,0 +1,263 @@
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QPushButton
+from PyQt5.QtGui import QFont
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore
+import math
+import re
+import pytest
+class Lab1MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.init_ui()
+
+    def init_ui(self):
+        font = QFont()
+        font.setPointSize(21)
+        font.setBold(False)
+        font.setUnderline(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
+
+        self.setWindowTitle("Калькулятор")
+        self.setGeometry(0, 0, 959, 738)
+        self.centralwidget = QWidget()
+        self.setCentralWidget(self.centralwidget)
+
+        self.label_result = QLabel(self.centralwidget)
+        self.label_result.setGeometry(10, 10, 711, 70)
+        self.label_result.setFont(font)
+        self.label_result.setStyleSheet("background-color: rgb(227, 227, 227);")
+        self.label_result.setObjectName("label_result")
+
+        self.label_history = QLabel(self.centralwidget)
+        self.label_history.setEnabled(True)
+        self.label_history.setGeometry(730, 10, 211, 671)
+
+        font.setPointSize(12)
+        font.setKerning(True)
+        self.label_history.setFont(font)
+        self.label_history.setTabletTracking(False)
+        self.label_history.setAcceptDrops(False)
+        self.label_history.setScaledContents(False)
+        self.label_history.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+        self.label_history.setObjectName("label_history")
+
+        self.btn_7 = QPushButton(self.centralwidget)
+        self.btn_7.setGeometry(QtCore.QRect(10, 90, 142, 142))
+        font = QtGui.QFont()
+        font.setPointSize(35)
+        self.btn_7.setFont(font)
+        self.btn_7.setStyleSheet("")
+        self.btn_7.setObjectName("btn_7")
+        self.btn_8 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_8.setGeometry(QtCore.QRect(152, 90, 142, 142))
+
+        self.btn_8.setFont(font)
+        self.btn_8.setObjectName("btn_8")
+        self.btn_9 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_9.setGeometry(QtCore.QRect(294, 90, 142, 142))
+
+        self.btn_9.setFont(font)
+        self.btn_9.setObjectName("btn_9")
+        self.btn_add = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_add.setGeometry(QtCore.QRect(436, 90, 142, 142))
+
+        self.btn_add.setFont(font)
+        self.btn_add.setObjectName("btn_add")
+        self.btn_6 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_6.setGeometry(QtCore.QRect(294, 240, 142, 142))
+
+        self.btn_6.setFont(font)
+        self.btn_6.setObjectName("btn_6")
+        self.btn_subtract = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_subtract.setGeometry(QtCore.QRect(436, 240, 142, 142))
+
+        self.btn_subtract.setFont(font)
+        self.btn_subtract.setObjectName("btn_subtract")
+        self.btn_5 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_5.setGeometry(QtCore.QRect(152, 240, 142, 142))
+
+
+        self.btn_5.setFont(font)
+        self.btn_5.setObjectName("btn_5")
+        self.btn_4 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_4.setGeometry(QtCore.QRect(10, 240, 142, 142))
+
+
+        self.btn_4.setFont(font)
+        self.btn_4.setObjectName("btn_4")
+        self.btn_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_3.setGeometry(QtCore.QRect(294, 390, 142, 142))
+
+
+        self.btn_3.setFont(font)
+        self.btn_3.setObjectName("btn_3")
+        self.btn_divide = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_divide.setGeometry(QtCore.QRect(436, 390, 142, 142))
+
+        self.btn_divide.setFont(font)
+        self.btn_divide.setObjectName("btn_divide")
+        self.btn_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_2.setGeometry(QtCore.QRect(152, 390, 142, 142))
+
+        self.btn_2.setFont(font)
+        self.btn_2.setObjectName("btn_2")
+        self.btn_1 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_1.setGeometry(QtCore.QRect(10, 390, 142, 142))
+
+        self.btn_1.setFont(font)
+        self.btn_1.setObjectName("btn_1")
+        self.btn_0 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_0.setGeometry(QtCore.QRect(10, 540, 142, 142))
+
+        font = QtGui.QFont()
+        font.setFamily("MS Shell Dlg 2")
+        font.setPointSize(35)
+        self.btn_0.setFont(font)
+        self.btn_0.setObjectName("btn_0")
+        self.btn_equal = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_equal.setGeometry(QtCore.QRect(436, 540, 142, 142))
+        font = QtGui.QFont()
+        font.setFamily("Lisichka Comic")
+        font.setPointSize(35)
+        self.btn_equal.setFont(font)
+        self.btn_equal.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                     "background-color: rgb(25, 106, 167);")
+        self.btn_equal.setObjectName("btn_equal")
+        self.btn_clear = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_clear.setGeometry(QtCore.QRect(870, 600, 81, 81))
+        font = QtGui.QFont()
+        font.setFamily("Leelawadee")
+        font.setPointSize(21)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btn_clear.setFont(font)
+        self.btn_clear.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                     "background-color: rgb(255, 8, 0);")
+        self.btn_clear.setObjectName("btn_clear")
+        self.btn_dot = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_dot.setGeometry(QtCore.QRect(152, 540, 142, 142))
+        font = QtGui.QFont()
+        font.setFamily("MS Shell Dlg 2")
+        font.setPointSize(35)
+        self.btn_dot.setFont(font)
+        self.btn_dot.setObjectName("btn_dot")
+        self.btn_interest = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_interest.setGeometry(QtCore.QRect(580, 90, 142, 142))
+        font = QtGui.QFont()
+        font.setPointSize(35)
+        self.btn_interest.setFont(font)
+        self.btn_interest.setObjectName("btn_interest")
+        self.btn_pow = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_pow.setGeometry(QtCore.QRect(580, 240, 142, 142))
+        font = QtGui.QFont()
+        font.setPointSize(35)
+        self.btn_pow.setFont(font)
+        self.btn_pow.setObjectName("btn_pow")
+        self.btn_root = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_root.setGeometry(QtCore.QRect(580, 390, 142, 142))
+        font = QtGui.QFont()
+        font.setPointSize(35)
+        self.btn_root.setFont(font)
+        self.btn_root.setObjectName("btn_root")
+        self.btn_multiply = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_multiply.setGeometry(QtCore.QRect(294, 540, 142, 142))
+        font = QtGui.QFont()
+        font.setPointSize(35)
+        self.btn_multiply.setFont(font)
+        self.btn_multiply.setObjectName("btn_multiply")
+        self.btn_del = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_del.setGeometry(QtCore.QRect(580, 540, 142, 142))
+        font = QtGui.QFont()
+        font.setFamily("Lato Semibold")
+        font.setPointSize(35)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btn_del.setFont(font)
+        self.btn_del.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                   "background-color: rgb(255, 0, 0);")
+        self.btn_del.setObjectName("btn_del")
+        self.retranslateUi()
+        self.add_functions()
+        self.test_clear_function()
+
+    def retranslateUi(self):
+
+        self.label_result.setText("0")
+        self.label_history.setText("Історія:\n")
+        self.btn_7.setText("7")
+        self.btn_8.setText("8")
+        self.btn_9.setText("9")
+        self.btn_add.setText("+")
+        self.btn_6.setText("6")
+        self.btn_subtract.setText("-")
+        self.btn_5.setText("5")
+        self.btn_4.setText("4")
+        self.btn_3.setText("3")
+        self.btn_divide.setText("/")
+        self.btn_2.setText("2")
+        self.btn_1.setText("1")
+        self.btn_0.setText("0")
+        self.btn_equal.setText("=")
+        self.btn_clear.setText("DEL")
+        self.btn_dot.setText(".")
+        self.btn_interest.setText("%")
+        self.btn_pow.setText("^")
+        self.btn_root.setText("√")
+        self.btn_multiply.setText("*")
+        self.btn_del.setText("Х")
+
+    def add_functions(self):
+        self.btn_0.clicked.connect(lambda: self.write_number(self.btn_0.text()))
+        self.btn_1.clicked.connect(lambda: self.write_number(self.btn_1.text()))
+        self.btn_2.clicked.connect(lambda: self.write_number(self.btn_2.text()))
+        self.btn_3.clicked.connect(lambda: self.write_number(self.btn_3.text()))
+        self.btn_4.clicked.connect(lambda: self.write_number(self.btn_4.text()))
+        self.btn_5.clicked.connect(lambda: self.write_number(self.btn_5.text()))
+        self.btn_6.clicked.connect(lambda: self.write_number(self.btn_6.text()))
+        self.btn_7.clicked.connect(lambda: self.write_number(self.btn_7.text()))
+        self.btn_8.clicked.connect(lambda: self.write_number(self.btn_8.text()))
+        self.btn_9.clicked.connect(lambda: self.write_number(self.btn_9.text()))
+        self.btn_multiply.clicked.connect(lambda: self.write_number(self.btn_multiply.text()))
+        self.btn_add.clicked.connect(lambda: self.write_number(self.btn_add.text()))
+        self.btn_interest.clicked.connect(lambda: self.write_number(self.btn_interest.text()))
+        self.btn_dot.clicked.connect(lambda: self.write_number(self.btn_dot.text()))
+        self.btn_divide.clicked.connect(lambda: self.write_number(self.btn_divide.text()))
+        self.btn_subtract.clicked.connect(lambda: self.write_number(self.btn_subtract.text()))
+        self.btn_pow.clicked.connect(lambda: self.write_number("**"))
+        self.btn_equal.clicked.connect(self.results)
+        self.btn_clear.clicked.connect(self.clear_function)
+        self.btn_del.clicked.connect(self.del_function)
+        self.btn_root.clicked.connect(self.root_function)
+
+    def root_function(self):
+        if float(eval(self.label_result.text())) < 0:
+            self.label_history.setText(self.label_history.text() + "\n√(" + self.label_result.text() + ")= Error")
+            self.label_result.setText("Error")
+        else:
+            res = math.sqrt(eval(self.label_result.text()))
+            self.label_history.setText(self.label_history.text() + "\n√(" + self.label_result.text() + ")=" + str(res))
+            self.label_result.setText(str(res))
+
+    def clear_function(self):
+        self.label_history.setText("Історія:\n")
+
+    def del_function(self):
+        self.label_result.setText("0")
+
+    def write_number(self, number):
+        if self.label_result.text() == "0" or self.label_result.text() == "Error":
+            self.label_result.setText(number)
+        else:
+            self.label_result.setText(self.label_result.text() + number)
+
+    def results(self):
+        pattern = r"/0\.\d+"
+        if ("/0" in self.label_result.text() or "Error" in self.label_result.text()) and not re.search(pattern,
+                                                                                                       self.label_result.text()):
+            self.label_history.setText(self.label_history.text() + "\n" + self.label_result.text() + "= Error")
+            self.label_result.setText("Error")
+        else:
+            res = eval(self.label_result.text())
+            self.label_history.setText(self.label_history.text() + "\n" + self.label_result.text() + "=" + str(res))
+            self.label_result.setText(str(res))
